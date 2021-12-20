@@ -1,0 +1,732 @@
+<!-- 
+    Это комментарий языка HTML, всё, что указано в такой конструкции не обрабатывается браузером, 
+    и не отображается на странице 
+-->
+<!-- Ставить комментарии можно сочетанием клавиш ctrl+? (английская раскладка клавиатуры) -->
+<!-- Данный файл имеет название "index", обычно главную страницу всегда так называют (точка входа)  -->
+<!-- Файл с названием "index" сервер подключает автоматически (при стандартных настройках) -->
+<!-- Что такое клиент-серверная архитектура, узнать можно здесь: https://habr.com/ru/post/495698/ -->
+<!-- HTML (HyperText Markup Language) - это язык разметки гипер текста -->
+<!-- Тег - это специальный управляющий код, записываемый в угловых скобках "<" и ">" -->
+<!-- Тег является элементом разметки гипер текста (контейнером) -->
+<!-- Теги бывают: одиночными <имя тега> (нет закрывающего тега) и парными <имя тега>...</имя тега> -->
+<!-- <!DOCTYPE html> - одиночный тег указывающий тип документа и версию, в данном случаи HTML 5 -->
+<!DOCTYPE html>
+<!-- <html></html> - парный обязательный тег оборачивающий весь документ -->
+<!-- Атрибуты - это дополнительные значения, которые настраивают элементы или регулируют их поведение различным способом -->
+<!-- leng - атриут указывающий используемый на страницы язык для отображения контента -->
+<html lang="ru">
+<!-- <head> - обязательный тег, не отображается визуально на странице -->
+<!-- <head> содержит все необходимые данные о HTML документе (метаданные) -->
+<head>
+    <!-- charset - атрибут, указывающий используемую кодировку, в данном случае самую распространенную UTF-8 -->
+    <meta charset="UTF-8">
+    <!-- Далее идут еще ряд настроек страницы, здесь рассматривать не будем -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <title> - задает текст заголовка страницы на вкладке браузера -->
+    <title>WebDev - шпаргалка</title>
+
+    <!-- Добавляем favicon (значок на вкладке браузера) -->
+    <!-- может быть форматов ICO, GIF, PNG, JPG, размеры (32×32, 24×24, 48×48, 64×64, 128×128 и 256×256 -->
+    <!-- https://webformyself.com/dobavlenie-ikonok-dlya-sajta-v-multibrauzernom-i-multipplatformennom-mire/ -->
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+
+    <!-- <link> - подключает дополнительный файл, в данном случае CSS стилей -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- CSS стили можно писать не подключая отдельного файла внутри парного тега <style> классы </style> -->
+    <style>
+        .news{
+            /* Скрываем блок с новостями */
+            display: none;
+        }
+    </style>
+
+    <!-- <script> - в данном случае подключает JavaScript файл, но JavaScript код можно писать не подключая файла -->
+    <!-- Атрибут "defer" сообщает браузеру, что он должен продолжать обрабатывать страницу и загружать скрипт в фоновом режиме, а затем запустить этот скрипт, когда он загрузится. -->
+    <script defer src="js/script.js"></script>
+
+    <!-- Внутри самого тега <script> js код </script> -->
+    <script>
+        // Тут можно писать код на языке JavaScript ;)
+        // Код ниже управляет открытием и закрытием формы 
+        // (если ты только начал своё обучение можешь пропустить содержимое тега <script>, вернёшся к нему потом)
+        function openModalWindow(){
+            // Получаем элемент по id и добавляем к нему класс
+            // https://learn.javascript.ru/styles-and-classes
+            document.getElementById('modalWindow').classList.add('modal-window--open');
+        }
+
+        function closeModalWindow(){
+            // Получаем элемент по id и удаляем у него класс
+            document.getElementById('modalWindow').classList.remove('modal-window--open');
+        }
+
+        function getMoney(event){
+            // Отключаем отправку формы
+            event.preventDefault();
+            // Находим элемент по id и меняем свойство display в стилях
+            document.getElementById('submitBtn').style.display = 'none';
+            document.getElementById('successMoney').style.display = 'block';
+        }
+
+    </script>
+</head>
+
+<!-- <body> - обязательный парный тег, всё, что должно отображаться на странице, должно быть внутри него -->
+<body>
+    <!-- <div> - парный тэг универсальный контейнер -->
+    <!-- class - атрибут, указывающий имя класса из каскадной таблици стилей CSS (Классы могут повторяться у разных тегов) -->
+    <!-- Смотри файл css/style.css -->
+    <!-- id - атрибут указывающий уникальный идентификатор, не может повторяться у других тегов -->
+    <div class="header-webdev" id="webdev">
+        <!-- Также у тега стиль можно задать через атрибут "style", но так делать не рекомендуется, так как у таких стилей наивысший приоритет -->
+        <!-- https://idg.net.ua/blog/uchebnik-css/azy-css/kaskadnost -->
+        <div class="header-webdev__container" style="border: 0;">
+            <img class="header-webdev__logo" src="img/logo.png" alt="Логотип" >
+            <!-- <h1> - главный заголовок страницы (лучне использовать единажды на странице) -->
+            <h1 class="header__title">WebDev</h1>
+            <!-- <h2> - подзаголовок (может быть много) -->
+            <h2 class="header__subtitle">Web-шпаргалка</h2>
+        </div>
+    </div>
+    <div class="vs-block">
+        <!-- <a> - тэг ссылки на другую страницу -->
+        <!-- В атрибуте "href" указывается ссылка на нужную страницу -->
+        <!-- target="_blank" - указывает на то, что ссылка будет открыта на новой вкладке браузера -->
+        <a class="vs-block__link" href="https://code.visualstudio.com/download" target="_blank">Скачай Visual Studio Code</a>
+        <!-- Тег <a> может ссылаться не только на другой сайт или страницу,  -->
+        <!-- но и на блоки внутри страницы по их id (так называемый якорь) для этого пишем символ "#" и сам id в атребету "href" -->
+        <a class="arrow-top" href="#webdev"></a>
+        <!-- <p> - обозначает абзац -->
+        <p class="vs-block__text">
+            <!-- <br> - тег переноса строки -->
+            И смотри код данного файла, всех с ним связанных и в консоль браузера <br>
+            (для вызова консоли нажмите клавишу "F12")
+        </p>
+    </div>
+    <div class="btn-open btn-open__center" onclick="openModalWindow()">
+        Нажми меня
+    </div>
+
+    <!-- -------------------------------- 1. HTML 5 --------------------------------------------- -->
+                                <!-- Семантическая вёрстка -->
+
+    <!-- Вся нижеследующая структура идет в теге <body> -->
+
+    <!-- <header> - верхняя часть сайта (шапка сайта), может повторятся на других страницах -->
+    <header>
+        <!-- <nav> - меню сайта -->
+        <nav></nav>
+    </header>
+    <!-- <main> - основной контент конкретной страницы, используем один раз на странице -->
+    <main>
+        <!-- <section> - задает раздел документа, например блок новостей -->
+        <section class="news">
+            <!-- <article> - тег блока статей -->
+            <article class="news__item">
+                <header class="news__header">
+                    <h2 class="news__title"> Новость 1</h2>
+                    <section class="news__text">
+                        <!-- <p> - обозначает абзац -->
+                        <p>
+                            Текст 1
+                        </p>
+                    </section>
+                </header>
+            </article>
+
+            <article class="news__item">
+                <header class="news__header">
+                    <h2 class="news__title"> Новость 2</h2>
+                    <section class="news__text">
+                        <p>
+                            Текст 2
+                        </p>
+                    </section>
+                </header>
+            </article>
+
+        </section>
+
+        <section class="banners">
+
+        </section>
+    </main>
+    <!-- <aside> - блок используется как правая или левая панель на сайте -->
+    <aside>
+
+    </aside>
+    <!-- <footer> - нижняя часть сайта (подвал сайта), может повторятся на других страницах -->
+    <footer>
+        <nav>
+
+        </nav>
+    </footer>
+
+    <!-- Есть и другие теги, тут приведены основные для семантической верстки, но можно верстать и на div'вах -->
+                                   <!-- http://htmlbook.ru/html/ -->
+                            <!-- https://htmlacademy.ru/courses/299/run/1 -->
+
+
+
+    <!-- ----------------------------- 2. Методология - БЭМ ------------------------------------- -->
+                                  <!-- Блок Элемент Модификатор -->
+
+                        <!-- https://www.youtube.com/watch?v=Jrjwewef_Ws -->
+
+                        <!-- Принцип наименования классов CSS стилей -->
+    <!-- 2.1 -->
+    <!-- Название-блока__Элемент -->
+    <div class="page-header__logo"></div>
+    <!-- Модификатор или элемент может отсутствовать -->
+    <!-- Название может быть из нескольких слов, разделяются "-" -->
+
+
+    <!-- Блок__Элемент--Модификатор -->
+    <div class="list__item--active"></div> 
+    <!-- Международный вариант наименования -->
+
+    <!-- Блок__Элемент_Модификатор -->
+    <div class="list__item_active"></div>
+    <!-- Вариант наименования в Яндец -->
+
+    <!-- 2.2 -->
+    <!-- Блок -->
+    <!-- Блок - это независимый компонент, название компонента характерезует смысл "что это?"  -->
+    <!-- У блока не должно быть внешних отступов! (margin) -->
+    <!-- У блоков позиционирование использовать нельзя! -->
+
+    <!-- Внутри блока могут быть другие блоки -->
+    <div class="header">
+        <div class="logo"></div>
+        <div class="menu"></div>
+    </div>
+
+    <!-- 2.3 -->
+    <!-- Элемент -->
+    <!-- Элемент - это составная часть блока, которая не может использоватся в отрыве от него. -->
+    <!-- Название элемента характеризует смысл "что это?" -->
+
+    <!-- 2.4 -->
+    <!-- Создавайте Блок, если эта часть верстки где-то на сайте будет повторяться, иначе создавайте Элемент -->
+
+    <!-- "header" - блок, "header__logo" и "header__menu" - элементы -->
+    <div class="header">
+        <div class="header__logo"></div>
+        <div class="header__menu"></div>
+    </div>
+
+    <!-- "menu-header" - блок, "menu-header__item" - элемент -->
+    <div class="menu-header">
+        <div class="menu-header__item"></div>
+    </div>
+    
+    <!-- 2.5 -->
+    <!-- Вложенность -->
+    <!-- Все элементы имеют название верхнего блока, несмотря на вложенность друг в друга -->
+    <div class="about">
+        <div class="about__inner">
+            <div class="about__inner-item"></div>
+        </div>
+    </div>
+    <!-- Элемента элементов небывает! -->
+
+    <!-- 2.6 -->
+    <!-- У всех тегов должны быть классы -->
+    <!-- В CSS не должно быть вложенности классов, каждый класс отдельно!!! -->
+    <!-- Это делают, чтобы не было "Специфичности" - приоритетности одного стиля над другим -->
+    <style>
+        .about{
+            height: 0;
+        }
+
+        .about_inner{
+            height: 0;
+        }
+
+        .about_inner-item{
+            height: 0;
+        }
+    </style>
+
+    <!-- 2.7 -->
+    <!-- Модификатор -->
+    <!-- Модификатор - это сущность, определяющая внешний вид, состояние или поведение блока либо элемента -->
+    <!-- Название модификатора характеризует внешний вид "какой размер?", "какая тема?", "какой цвет?" -->
+    <!-- Модификатор может быть как у элемента, так и у блока -->
+    <div class="menu__item--theme--spase">
+        <div class="menu__item"></div>
+        <div class="menu__item menu__item--active"></div>
+    </div>
+
+    <!-- 2.8 -->
+    <!-- Типы модификаторов -->
+    <!-- 1) Булевый -->
+    <!-- Используют, когда важно только наличие или отсутствие модификатора -->
+    <div class="menu">
+        <div class="menu__item menu__item--active"></div>
+        <div class="menu__item menu__item--disabled"></div>
+        <div class="menu__item menu__item--focused"></div>
+    </div>
+
+    <!-- 2) Ключ-значение -->
+    <!-- Используют, когда важно значение модификатора -->
+    <div class="menu">
+        <div class="menu__item menu__item--color--red"></div>
+        <div class="menu__item menu__item--color--blue"></div>
+        <div class="menu__item menu__item--color--green"></div>
+    </div>
+
+    <!-- Структура полного имени модификатора -->
+    <!-- имя-блока--значение-модификатора -->
+    <div class="menu menu--active"></div>
+    <!-- имя-блока--имя-модификатора--значение-модификатора -->
+    <div class="menu menu--them--spase"></div>
+    <!-- имя-блока__имя-элемента--значение-модификатора -->
+    <div class="menu">
+        <div class="menu__item menu__item--active"></div>
+    </div>
+    <!-- имя-блока__имя-элемента--имя-модификатора--значение-модификатора -->
+    <div class="menu">
+        <div class="menu__item menu__item--color--blue"></div>
+    </div>
+    
+    <!-- Модификатор нельзя использовать самостоятельно! -->
+
+    <!-- Возможен микс, один тег является и блоком и элементом одновременно -->
+    <div class="search-form header__search-form"></div>
+
+    <!-- Класс всегда идет после названия тега, а за ним уже остальные атрибуты (id, name, src и т.д.) -->
+
+
+    <div class="modal-window" id="modalWindow">
+        <!-- Тег <form> представляет (собой) раздел документа, содержащий интерактивные элементы управления, которые позволяют пользователю отправлять информацию на веб-сервер -->
+        <!-- В атрибуте "method" указываем метод передачи данных серверу (обычно GET или POST) -->
+        <!-- https://htmlacademy.ru/blog/boost/frontend/get-vs-post -->
+        <!-- Атрибут "action" - адрес программы или документа, который обрабатывает данные формы (нам отправить её некуда, поставим заглушку "#") -->
+        <!-- "onsubmit" - событие отправки формы, сраьатывает при нажатии на кнопку в форме (У нас выполняет JavaScript функцию getMoney, смотри тег <script> выше ) -->
+        <form class="modal-form modal-form__centr" method="POST" action="#"  onsubmit="getMoney(event)" >
+            <!-- "onclick" - событие клика мышки по элементу -->
+            <div class="modal-window__exit" onclick="closeModalWindow()"></div>
+            <div class="modal-form__text">
+                Отправим Вам деньги по e-mail'у<br>
+                Укажите свои данные
+            </div>
+            <!-- Выпадающий список -->
+            <!-- В массиве передачи данных  значение "ключ массива" будет иметь название из атрибута "name" -->
+            <!-- В данном случае ["selectMoney":"value2"] -->
+            <!-- https://developer.mozilla.org/ru/docs/Web/HTML/Element/select -->
+            <select class="modal-form__select modal-form__input" name="selectMoney">
+                <!-- Создаем элементы списка, на сервер отправляется значение, указанное в атрибуте "value" -->
+                <option value="value1">100$</option>
+                <option value="value2" selected>1000$</option>
+                <option value="value3">10000$</option>
+                <option value="value4">100000$</option>
+                <option value="value5">1000000$</option>
+            </select>
+            <!-- <input> используется для создания интерактивных элементов управления в веб-формах для получения данных от пользователя -->
+            <!-- В зависимости от артибута "type", может меняться как визуальное отображение, так и механизм работы -->
+            <!-- https://developer.mozilla.org/ru/docs/Web/HTML/Element/Input -->
+            <!-- В данном случае будет создано поле для ввода электронного адреса почты -->
+            <input class="modal-form__email modal-form__input" type="email" name="emailMoney" placeholder="Введите e-mail">
+            <!-- <textarea> представляет собой элемент формы для создания области, в которую можно вводить несколько строк текста -->
+            <textarea class="modal-form__description modal-form__input" name="descriptionMoney" id="descriptionMoney" cols="30" rows="10" placeholder="Опишите, как планируете потратить деньги"></textarea>
+            <!-- <ul> используется для неупорядоченного списка - в частности для маркированного списка -->
+            <!-- Для маркированного списка используют тег <ul> для нумерованного <ol> -->
+            <!-- http://htmlbook.ru/samhtml/spiski/numerovannyy-spisok -->
+            <ul class="modal-form__doc">
+                <li class="modal-form_doc-item">Обещаю потратить все деньги</li>
+                <li class="modal-form_doc-item">Обещаю, будет весело</li>
+                <li class="modal-form_doc-item">Обещаю не возвращать</li>
+            </ul>
+            <!-- checkbox - Флажок («чекбокс») -->
+            <!-- Следует использовать атрибут value для определения значения, которое будет отдано этим элементом -->
+            <!-- Используйте атрибут checked, чтобы указать, должен ли флажок быть выставлен -->
+            <input class="modal-form__check" type="checkbox" name="docMoney" id="docMoney">
+            <!-- <label> представляет собой подпись к элементу пользовательского интерфейса -->
+            <!-- В атрибуте for указывают id того элемента, с которым связан <label> -->
+            <label class="modal-form__label" for="docMoney">Ответ мой ясен, "на всё согласен"</label>
+            <!-- submit - кнопка отправки формы -->
+            <input class="modal-form__btn" type="submit" value="Отправить" id="submitBtn" >
+            <div class="modal-form__success" id="successMoney">
+                Поздравляем! <br>
+                Деньги успешно высланы на указанный e-mail! 
+            </div>
+        </form>
+    </div>
+
+
+    <!-- -------------------------------------- 3. Flex ----------------------------------------- -->
+                                  <!-- Смотри файл css/style.css -->
+
+    <div class="flex-box flex-box__center">
+        <h2 class="flex-box__title">Технология Flex</h2>
+        <section class="flex-example">
+            <header class="flex-example__title">
+                Пример 1<br>
+                flex-direction: row;
+            </header>
+            <div class="flex-example__block">
+                <div class="flex-example__box">1</div>
+                <div class="flex-example__box">2</div>
+                <div class="flex-example__box">3</div>
+                <div class="flex-example__box">4</div>
+                <div class="flex-example__box">5</div>
+            </div>
+        </section>
+
+        <section class="flex-example">
+            <header class="flex-example__title">
+                Пример 2<br>
+                flex-direction: column;
+            </header>
+            <div class="flex-example__block flex-example__block2">
+                <div class="flex-example__box">1</div>
+                <div class="flex-example__box">2</div>
+                <div class="flex-example__box">3</div>
+                <div class="flex-example__box">4</div>
+                <div class="flex-example__box">5</div>
+            </div>
+        </section>
+
+        <section class="flex-example">
+            <header class="flex-example__title">
+                Пример 3<br>
+                flex-direction: row-reverse;
+            </header>
+            <div class="flex-example__block flex-example__block3">
+                <div class="flex-example__box">1</div>
+                <div class="flex-example__box">2</div>
+                <div class="flex-example__box">3</div>
+                <div class="flex-example__box">4</div>
+                <div class="flex-example__box">5</div>
+            </div>
+        </section>
+
+        <section class="flex-example">
+            <header class="flex-example__title">
+                Пример 4<br>
+                flex-direction: column-reverse;
+            </header>
+            <div class="flex-example__block flex-example__block4">
+                <div class="flex-example__box">1</div>
+                <div class="flex-example__box">2</div>
+                <div class="flex-example__box">3</div>
+                <div class="flex-example__box">4</div>
+                <div class="flex-example__box">5</div>
+            </div>
+        </section>
+
+        <section class="flex-example">
+            <header class="flex-example__title">
+                Пример 5<br>
+                justify-content: flex-start;
+            </header>
+            <div class="flex-example__block flex-example__block5">
+                <div class="flex-example__box">1</div>
+                <div class="flex-example__box">2</div>
+                <div class="flex-example__box">3</div>
+                <div class="flex-example__box">4</div>
+                <div class="flex-example__box">5</div>
+            </div>
+        </section>
+
+        <section class="flex-example">
+            <header class="flex-example__title">
+                Пример 6<br>
+                justify-content: center;
+            </header>
+            <div class="flex-example__block flex-example__block6">
+                <div class="flex-example__box">1</div>
+                <div class="flex-example__box">2</div>
+                <div class="flex-example__box">3</div>
+                <div class="flex-example__box">4</div>
+                <div class="flex-example__box">5</div>
+            </div>
+        </section>
+
+        <section class="flex-example">
+            <header class="flex-example__title">
+                Пример 7<br>
+                justify-content: flex-end;
+            </header>
+            <div class="flex-example__block flex-example__block7">
+                <div class="flex-example__box">1</div>
+                <div class="flex-example__box">2</div>
+                <div class="flex-example__box">3</div>
+                <div class="flex-example__box">4</div>
+                <div class="flex-example__box">5</div>
+            </div>
+        </section>
+
+        <section class="flex-example">
+            <header class="flex-example__title">
+                Пример 8<br>
+                justify-content: space-between;
+            </header>
+            <div class="flex-example__block flex-example__block8">
+                <div class="flex-example__box">1</div>
+                <div class="flex-example__box">2</div>
+                <div class="flex-example__box">3</div>
+                <div class="flex-example__box">4</div>
+                <div class="flex-example__box">5</div>
+            </div>
+        </section>
+
+        <section class="flex-example">
+            <header class="flex-example__title">
+                Пример 9<br>
+                justify-content: space-around;
+            </header>
+            <div class="flex-example__block flex-example__block9">
+                <div class="flex-example__box">1</div>
+                <div class="flex-example__box">2</div>
+                <div class="flex-example__box">3</div>
+                <div class="flex-example__box">4</div>
+                <div class="flex-example__box">5</div>
+            </div>
+        </section>
+
+        <section class="flex-example">
+            <header class="flex-example__title">
+                Пример 10<br>
+                align-items: flex-start;
+            </header>
+            <div class="flex-example__block flex-example__block10">
+                <div class="flex-example__box">1</div>
+                <div class="flex-example__box">2</div>
+                <div class="flex-example__box">3</div>
+                <div class="flex-example__box">4</div>
+                <div class="flex-example__box">5</div>
+            </div>
+        </section>
+
+        <section class="flex-example">
+            <header class="flex-example__title">
+                Пример 11<br>
+                align-items: center;
+            </header>
+            <div class="flex-example__block flex-example__block11">
+                <div class="flex-example__box">1</div>
+                <div class="flex-example__box">2</div>
+                <div class="flex-example__box">3</div>
+                <div class="flex-example__box">4</div>
+                <div class="flex-example__box">5</div>
+            </div>
+        </section>
+
+        <section class="flex-example">
+            <header class="flex-example__title">
+                Пример 12<br>
+                align-items: flex-end;
+            </header>
+            <div class="flex-example__block flex-example__block12">
+                <div class="flex-example__box">1</div>
+                <div class="flex-example__box">2</div>
+                <div class="flex-example__box">3</div>
+                <div class="flex-example__box">4</div>
+                <div class="flex-example__box">5</div>
+            </div>
+        </section>
+
+        <section class="flex-example">
+            <header class="flex-example__title">
+                Пример 13<br>
+                align-items: stretch;
+            </header>
+            <div class="flex-example__block flex-example__block13">
+                <div class="flex-example__box flex-example__box--auto">1</div>
+                <div class="flex-example__box flex-example__box--auto">2</div>
+                <div class="flex-example__box flex-example__box--auto flex-example__box--big">3</div>
+                <div class="flex-example__box flex-example__box--auto flex-example__box--small">4</div>
+                <div class="flex-example__box flex-example__box--auto">5</div>
+            </div>
+        </section>
+
+        <section class="flex-example">
+            <header class="flex-example__title">
+                Пример 14<br>
+                align-items: baseline;
+            </header>
+            <div class="flex-example__block flex-example__block14">
+                <div class="flex-example__box flex-example__box--auto">1</div>
+                <div class="flex-example__box flex-example__box--auto">2</div>
+                <div class="flex-example__box flex-example__box--auto flex-example__box--big">3</div>
+                <div class="flex-example__box flex-example__box--auto flex-example__box--small">4</div>
+                <div class="flex-example__box flex-example__box--auto">5</div>
+            </div>
+        </section>
+
+        <section class="flex-example">
+            <header class="flex-example__title">
+                Пример 15<br>
+                Выравнивание по центру, горизонтально
+            </header>
+            <div class="flex-example__block flex-example__block15">
+                <div class="flex-example__box flex-example__box--auto">1</div>
+                <div class="flex-example__box flex-example__box--auto">2</div>
+                <div class="flex-example__box flex-example__box--auto flex-example__box--big">3</div>
+                <div class="flex-example__box flex-example__box--auto flex-example__box--small">4</div>
+                <div class="flex-example__box flex-example__box--auto">5</div>
+            </div>
+        </section>
+
+        <section class="flex-example">
+            <header class="flex-example__title">
+                Пример 16<br>
+                Выравнивание по центру, вертикально
+            </header>
+            <div class="flex-example__block flex-example__block16">
+                <div class="flex-example__box flex-example__box--auto">1</div>
+                <div class="flex-example__box flex-example__box--auto">2</div>
+                <div class="flex-example__box flex-example__box--auto flex-example__box--big">3</div>
+                <div class="flex-example__box flex-example__box--auto flex-example__box--small">4</div>
+                <div class="flex-example__box flex-example__box--auto">5</div>
+            </div>
+        </section>
+
+        <section class="flex-example">
+            <header class="flex-example__title">
+                Пример 17<br>
+                align-self (индивидуальное выравнивание)
+            </header>
+            <div class="flex-example__block flex-example__block17">
+                <div class="flex-example__box flex-example__box--self">1</div>
+                <div class="flex-example__box flex-example__box--self">2</div>
+                <div class="flex-example__box">3</div>
+                <div class="flex-example__box flex-example__box--self">4</div>
+                <div class="flex-example__box">5</div>
+            </div>
+        </section>
+
+        <section class="flex-example">
+            <header class="flex-example__title">
+                Пример 18<br>
+                flex-basis, по горизонтали
+            </header>
+            <div class="flex-example__block flex-example__block18">
+                <div class="flex-example__box flex-example__box--basis">1</div>
+                <div class="flex-example__box flex-example__box--basis">2</div>
+                <div class="flex-example__box flex-example__box--basis">3</div>
+                <div class="flex-example__box flex-example__box--basis">4</div>
+                <div class="flex-example__box flex-example__box--basis">5</div>
+            </div>
+        </section>
+
+        <section class="flex-example">
+            <header class="flex-example__title">
+                Пример 19<br>
+                flex-basis, по вертикали
+            </header>
+            <div class="flex-example__block flex-example__block19">
+                <div class="flex-example__box flex-example__box--basis">1</div>
+                <div class="flex-example__box flex-example__box--basis">2</div>
+                <div class="flex-example__box flex-example__box--basis">3</div>
+                <div class="flex-example__box flex-example__box--basis">4</div>
+                <div class="flex-example__box flex-example__box--basis">5</div>
+            </div>
+        </section>
+
+        <section class="flex-example">
+            <header class="flex-example__title">
+                Пример 20<br>
+                flex-grow
+            </header>
+            <div class="flex-example__block flex-example__block20">
+                <div class="flex-example__box flex-example__box--grow1">1</div>
+                <div class="flex-example__box flex-example__box--grow1">2</div>
+                <div class="flex-example__box flex-example__box--grow1">3</div>
+                <div class="flex-example__box flex-example__box--grow1">4</div>
+                <div class="flex-example__box flex-example__box--grow1">5</div>
+            </div>
+        </section>
+
+        <section class="flex-example">
+            <header class="flex-example__title">
+                Пример 21<br>
+                flex-grow
+            </header>
+            <div class="flex-example__block flex-example__block21">
+                <div class="flex-example__box flex-example__box--grow1">1</div>
+                <div class="flex-example__box flex-example__box--grow2">2</div>
+                <div class="flex-example__box flex-example__box--grow1">3</div>
+                <div class="flex-example__box flex-example__box--grow3">4</div>
+                <div class="flex-example__box flex-example__box--grow1">5</div>
+            </div>
+        </section>
+
+        <section class="flex-example">
+            <header class="flex-example__title">
+                Пример 22<br>
+                flex-shrink
+            </header>
+            <div class="flex-example__block flex-example__block22">
+                <div class="flex-example__box">1</div>
+                <div class="flex-example__box">2</div>
+                <div class="flex-example__box flex-example__box--shrink0">3</div>
+                <div class="flex-example__box">4</div>
+                <div class="flex-example__box">5</div>
+            </div>
+        </section>
+
+        <section class="flex-example">
+            <header class="flex-example__title">
+                Пример 23<br>
+                flex
+            </header>
+            <div class="flex-example__block flex-example__block23">
+                <div class="flex-example__box">1</div>
+                <div class="flex-example__box">2</div>
+                <div class="flex-example__box flex-example__box--flex">3</div>
+                <div class="flex-example__box">4</div>
+                <div class="flex-example__box">5</div>
+            </div>
+        </section>
+
+        <section class="flex-example">
+            <header class="flex-example__title">
+                Пример 24<br>
+                flex-wrap: wrap;
+            </header>
+            <div class="flex-example__block flex-example__block24">
+                <div class="flex-example__box">1</div>
+                <div class="flex-example__box">2</div>
+                <div class="flex-example__box">3</div>
+                <div class="flex-example__box">4</div>
+                <div class="flex-example__box">5</div>
+            </div>
+        </section>
+
+        <section class="flex-example">
+            <header class="flex-example__title">
+                Пример 25<br>
+                order
+            </header>
+            <div class="flex-example__block flex-example__block25">
+                <div class="flex-example__box">1</div>
+                <div class="flex-example__box flex-example__box--order2">2</div>
+                <div class="flex-example__box flex-example__box--order-m1">3</div>
+                <div class="flex-example__box">4</div>
+                <div class="flex-example__box flex-example__box--order1">5</div>
+            </div>
+        </section>
+    </div>
+
+    <div class="media-box media-box__margen">
+        CSS @media<br>
+        медиавыражения
+    </div>
+    <div class="footer-webdev">
+        Версия 1.0 (2021 г.)
+    </div>
+
+    <!-- А что дальше? ;) -->
+    <!-- 1. Для ускорения процесса вёрстки используют плагин Emmet (он по умолчанию встроен в Visual Studio Code) -->
+    <!-- https://www.youtube.com/watch?v=mGPZ8P7xDLE -->
+    <!-- https://dwstroy.ru/stail/plaginy-rasshireniya/emmet-shpargalka/ -->
+    <!-- 2. Тренажер скорости печати: -->
+    <!-- https://www.typingstudy.com/ru -->
+
+</body>
+</html>
