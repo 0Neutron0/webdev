@@ -1,0 +1,729 @@
+/* Такой конструкцией слешек и звёздочек обозначается комментарий в CSS */
+/* ------------------------------------- 1. CSS3 ---------------------------------------- */
+/* CSS3 ( Cascading Style Sheets 3) - это каскадные таблицы стилей, язык, который отвечает за описание внешнего вида HTML-документа. */
+/* Через символ "*" обращаемся ко всем тегам на странице, к которой подключен данный файл */
+/* Также обращаемся ко всем их псевдоэлементам "before" и "after" */
+*,
+*::before,
+*::after {
+  /* box-sizing устанавливаем в значение border-box, что заставит границы элемента включать в его габаритные размеры*/
+  box-sizing: border-box;
+  /* "margin" - отвечает за размер внешних отступов */
+  /* может задавать каждую сторону отдельно, начиная сверху по часовой стрелке margin: 10px 15px 20px 25px */
+  /* В данном случае все отступы убираются в 0 */
+  margin: 0;
+  /* "padding" - отвечает за внутренние отступы */
+  /* подчиняется тем же правилам что и margin */
+  /* В данном случае все отступы убираются в 0 */
+  padding: 0;
+}
+
+/* Обращение к тегу по его названию */
+/* Не рекомендуется использовать в методологии БЭМ, но иногда может пригодится */
+body{
+  /* Свойство "color" задает цвет текста спомощью hex кодов цвета, возможны и другие варианты :*/
+  /* https://developer.mozilla.org/ru/docs/Web/CSS/background-color */
+  color: #ffffff;
+  /* "font-family" - задает тип шрифта */
+  /* если у пользователя на компьютере его нет, то браузер будет пытаться подключить следующий указанный через "," */
+  /* Можно подключать и свои шрифты http://htmlbook.ru/css/font-face */
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Символ "#" указывает на обращение к элементу по id, #айди элемента */
+/* Не рекомендуется использовать в методологии БЭМ, но иногда может пригодится */
+#webdev{
+  /* "width" - задает высоту элемента в %, но можно и в px, vh и др.   */
+  width: 100%;
+  /* "height" - задает высоту элемента, в данном случаи "auto" что она будет зависеть от содержания блока  */
+  height: auto;
+  /* "background-color" - задает цвет элемента, тут как и с текстом hex код цвета */
+  background-color: #32a852;
+  /* это уже нам известное свойство */
+  padding: 20px;
+  /* "text-align" выравнивает текст по горизонтали, "center" - в данном случае по центру  */
+  text-align: center;
+}
+
+.header-webdev__container{
+  width: 1024px;
+  /* Старый способ центрировать блок по горизонтали, теперь есть технология flex, о ней ниже ;) */
+  margin: 0 auto;
+}
+
+.header-webdev__logo{
+  height: 50px;
+  width: 50px;
+  /* По умолчанию вокруг тега <img> есть рамка, убираем её */
+  border: 0;
+}
+
+/* Точка в начале означает, что мы обращаемся ко всем элементам с именем класса "header__title" */
+.header__title{
+  /* "font-size" - задает размер шрифта */
+  font-size: 45px;
+  /* "font-weight" - задает "жирность" шрифта */
+  font-weight: bold;
+  /* Это значение генерирует блочный элемент, который обтекается другими элементами веб-страницы подобно встроенному элементу. (как тег <img>) */
+  /* http://htmlbook.ru/css/display */
+  display: inline-block;
+  /* "vertical-align" - вертикальное выравнивание текста */
+  /* top — выравнивание по верхнему краю строки */
+  /* middle — по середине строки */
+  /* bottom — по нижнему краю строки */
+  /* baseline — по базовой линии строки (значение по умолчанию) */
+  vertical-align: top;
+}
+
+.footer-webdev{
+  width: 100%;
+  background-color: #333;
+  color: #fff;
+  font-size: 20px;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.vs-block{
+  width: 100%;
+  height: auto;
+  text-align: center;
+  /* Если в hex коде все 3 первых символа совпадают с тремя последними можно указать только первые 3 */
+  background-color: #eee;
+  padding: 20px;
+}
+
+.vs-block__link{
+  font-size: 25px;
+}
+
+.vs-block__text{
+  color: #333;
+  margin-top: 15px;
+  font-size: 16px;
+}
+
+.arrow-top{
+  /* "block" - задает элементу поведение блока (как тег <div>), в данном сучае для тега <a> */
+  display: block;
+  /* Свойство "position" - Устанавливает способ позиционирования элемента относительно окна браузера или других объектов на веб-странице */
+  /* Принимает следующие значения: */
+
+  /* "absolute" - Указывает, что элемент абсолютно позиционирован, при этом другие элементы отображаются на веб-странице словно 
+  абсолютно позиционированного элемента и нет. Положение элемента задается свойствами "left", "top", "right" и "bottom". 
+  Eсли у родителя значение position установлено как "static" или родителя нет, то отсчет координат ведется от края окна 
+  браузера. Если у родителя значение position задано как "fixed", "relative" или "absolute", то отсчет координат ведется от края родительского элемента*/
+
+  /* "fixed" - Элемент привязывается к указанной свойствами "left", "top", "right" и "bottom" точке на экране и не меняет своего положения при прокрутке веб-страницы */
+
+  /* "relative" - Положение элемента устанавливается относительно его исходного места. Добавление свойств "left", 
+  "top", "right" и "bottom" изменяет позицию элемента и сдвигает его в ту или иную сторону от первоначального расположения. */
+
+  /* "static" - Элементы отображаются как обычно. Использование свойств "left", "top", "right" и "bottom" не приводит к каким-либо результатам */
+
+  /* "inherit" - Наследует значение родителя */
+
+  /* Мы тут используем "fixed" чтобы закрепить стрелку прокручивания к началу страницы */
+  position: fixed;
+  height: 50px;
+  width: 50px;
+  background-color: #eee;
+  /* Свойство border создает границу вокруг элемента, получает через пробел три параметра: */
+  /* первый - толщина границы, */
+  /* второй - тип границы (solid - сплошная, другие типы смотри в документации) */
+  /* третий - код цвета границы */
+  /* Свойство border не является частью технологии flex, это CSS3 */
+  border: 3px solid #32a852;
+  /* Свойство border-radius задаёт скругление углов элемента*/
+  /* если нужно скруглить какой-то конкретный угол элемента, то нужно использовать следующие свойства: */
+  /* border-top-left-radius - левый верхний угол */
+  /* border-top-right-radius - верхний правый */
+  /* order-bottom-left-radius - нижний левый */
+  /* border-bottom-right-radius - нижний правый */
+  /* Свойство скругления углов не являются частью технологии flex, это CSS3 */
+  border-radius: 7px;
+  /* "background-image" - Устанавливает фоновое изображение для элемента */
+  background-image: url(../img/arrow-icon.png);
+  /* "background-repeat" - устанавливает, как фоновые изображения будут повторяться*/
+  /* https://developer.mozilla.org/ru/docs/Web/CSS/background-repeat */
+  background-repeat: no-repeat;
+  /* "background-position" - Задает начальное положение фонового изображения, установленного с помощью свойства background-image */
+  /* left, center,  right, top,  center,  bottom, можно указывать несколько через запятую  */
+  background-position: center;
+  bottom: 15px;
+  right: 50px;
+  /* Свойство "transition" позволяет указать время, за которое указанные свойства изменят свое состояние при использовании псевдоклассов */
+  /* https://developer.mozilla.org/ru/docs/Web/CSS/transition */
+  transition: background-color 2s, transform 0.3s;
+}
+
+/* Псевдокласс :hover - Определяет стиль элемента при наведении на него курсора мыши */
+/* https://developer.mozilla.org/ru/docs/Web/CSS/Pseudo-classes */
+.arrow-top:hover{
+  background-color: #fff;
+  /* Свойство "transform" позволяет вам поворачивать, масштабировать, наклонять или сдвигать элемент. */
+  /* Оно модифицирует координатное пространство для CSS */
+  /* https://developer.mozilla.org/ru/docs/Web/CSS/transform */
+  transform: rotate(360deg);
+}
+
+.btn-open{
+  width: 200px;
+  color: #fff;
+  background-color: #32a852;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  padding: 20px;
+  /* "cursor" - Устанавливает вид курсора мыши при наведении на элемент (в данном случае указатель рука) */
+  /* https://developer.mozilla.org/ru/docs/Web/CSS/cursor */
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.btn-open:hover{
+   background-color: #39bd5c;
+}
+
+.btn-open__center{
+  margin: 10px auto;
+}
+
+.modal-window{
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background-color: #33333377;
+  right: 0;
+  top: 0;
+  /* Свойство "z-index" иметирует наличие оси z (глубины), */
+  /* элемент, у которого данный индекс больше будет выдвигаться на передний план */
+  z-index: 9999;
+}
+
+.modal-window--open{
+  display: block;
+}
+
+.modal-form{
+  position: relative;
+  /* height: 600px; */
+  width: 400px;
+  background-color: #333;
+  border: 5px solid #32a852;
+  /* Свойство "box-shadow" позволяет добавлять элементу одну или несколько теней, указывая их параметры через запятую */
+  /* Смещения по x и y от элемента, радиус размытия и его радиус, а также цвет */
+  /* https://developer.mozilla.org/ru/docs/Web/CSS/box-shadow */
+  box-shadow: 3px 3px 10px #000;
+  padding: 40px 16px 16px 16px;
+}
+
+.modal-form__centr{
+  margin: 30px auto;
+}
+
+
+.modal-window__exit{
+  position: absolute;
+  height: 25px;
+  width: 25px;
+  cursor: pointer;
+  top: 10px;
+  right: 10px;
+}
+
+/* Использование псевдоэлементов */
+/* В CSS, "::before" создаёт псевдоэлемент, который является первым потомком выбранного элемента */
+/* Часто используется для добавления косметического содержимого в элемент с помощью свойства "content" */
+/* https://developer.mozilla.org/ru/docs/Web/CSS/::before */
+.modal-window__exit::before{
+  position: absolute;
+  /* CSS-свойство "content" заменяет элемент сгенерированным значением */
+  content: '';
+  height: 25px;
+  width: 5px;
+  background-color: #fff;
+  transform: rotate(135deg);
+  transition: transform 0.5s;
+}
+
+/* В CSS, ::after создаёт псевдоэлемент, который является последним потомком выбранного элемента */
+.modal-window__exit::after{
+  position: absolute;
+  content: '';
+  height: 25px;
+  width: 5px;
+  background-color: #fff;
+  transform: rotate(45deg);
+  transition: transform 0.5s;
+}
+
+/* Можно комбенировать псевдоэлементы и псевдоклассы  */
+.modal-window__exit:hover::before{
+  transform: rotate(495deg);
+}
+
+.modal-window__exit:hover::after{
+  transform: rotate(405deg);
+}
+
+.modal-form__text{
+  width: 100%;
+  font-size: 16px;
+  color: #32a852;
+  font-weight: bold;
+  text-align: center;
+}
+
+.modal-form__input{
+  width: 100%;
+  height: 35px;
+  outline: none;
+  border: 3px solid #32a852;
+  font-size: 16px;
+  margin: 15px 0;
+  padding: 0 10px;
+}
+
+/* Обратите внимание, что два класса modal-form__input и modal-form__description имеют общее свойство height,
+ и оба этих класса применены к <textarea>, приоритет будет иметь то свойство, которое здесь ниже по коду */
+.modal-form__description{
+  /* Применится это свойство */
+  height: 100px;
+}
+
+.modal-form__doc{
+  margin-left: 20px;
+  margin-bottom: 10px;
+  color: #32a852;
+}
+
+.modal-form__label{
+  color: #eee;
+  font-weight: normal;
+  font-size: 14px;
+}
+
+.modal-form__btn{
+  display: block;
+  border: 0;
+  background-color: #32a852;
+  text-align: center;
+  margin: 15px auto;
+  padding: 10px 20px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+}
+
+.modal-form__btn:hover{
+  background-color: #39bd5c;
+}
+
+.modal-form__success{
+  display: none;
+  width: 100%;
+  text-align: center;
+  padding: 16px;
+  background-color: #32a852;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 7px;
+  margin: 16px 0;
+}
+
+/* Как создать триугольник */
+/* http://htmlbook.ru/blog/treugolniki-cherez-css */
+.modal-form__success::after{
+  position: absolute;
+  content: '';
+  /* Ширину и высоту блока задаем по нолям */
+  height: 0;
+  width: 0;
+  /* Делаем границы потолще и прозрачными */
+  border: 20px solid transparent;
+  /* Одну из сторон окрашиваем в нужный цвет */
+  border-top: 20px solid #32a852;
+  /* Позиционируем по вкусу ;) */
+  bottom: -7px;
+}
+
+/* Другие свойства стилей http://htmlbook.ru/css */
+
+.flex-box{
+  width: 1024px;
+  background-color: #333;
+  padding: 16px;
+}
+
+.flex-box__center{
+  margin: 0 auto;
+}
+
+.flex-box__title{
+  font-size: 20px;
+  color: #ccc;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.flex-example{
+  width: 100%;
+  height: auto;
+}
+
+.flex-example__title{
+  font-size: 16px;
+  color: #ccc;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* ------------------------------------- 2. Flex ---------------------------------------- */
+               /* https://tproger.ru/translations/how-css-flexbox-works/ */
+
+/* CSS Flexbox — это технология для создания сложных гибких макетов за счёт правильного размещения элементов на странице. */
+
+/* Пример 1 */
+.flex-example__block{
+  /* Делаем контейнер - flex контейнером, чтобы элементы в нем подчинялись технологии flex */
+  display: flex;
+  /* Технология "flex" основана на выравнивании элементов вдоль оси, идущей слева направо */
+  /* "flex-direction" - позволяет эту ось вращать */
+  /* Значение "row" (по умолчанию) устанавливает направление оси слева на право (элементы выравниваются в строку) */
+  /* Значение "column" устанавливает направление оси сверху вниз (элементы выравниваются в колонку) */
+  flex-direction: row;
+  margin: 20px 0 40px 0;
+  width: 100%;
+  height: auto;
+  min-height: 300px;
+  background-color: #777;
+}
+
+/* Пример 2 */
+.flex-example__block2{
+  /* Поменяем "flex-direction" на "column" */
+  flex-direction: column;
+}
+
+/* Пример 3 */
+.flex-example__block3{
+  /* Есть ещё парочка свойств для flex-direction: row-reverse и column-reverse */
+  /* меняют порядок следования элементов внутри блока */
+  flex-direction: row-reverse;
+}
+
+/* Пример 4 */
+.flex-example__block4{
+  /* Ну и column-reverse */
+  flex-direction: column-reverse;
+}
+
+/* Пример 5 */
+.flex-example__block5{
+  /* "justify-content" Отвечает за выравнивание элементов по главной оси */
+  /* Обратите внимание что если поменяли направление главной оси спомощью "flex-direction" */
+  /* то и выравнивание "justify-content" сменится с горизонтального на вертикальное */
+  /* Поумолчанию "flex-start" - по левому краю */
+  justify-content: flex-start;
+}
+
+/* Пример 6 */
+.flex-example__block6{
+  /* По центру "center" */
+  justify-content: center;
+}
+
+/* Пример 7 */
+.flex-example__block7{
+  /* По правому краю "flex-end" */
+  justify-content: flex-end;
+}
+
+/* Пример 8 */
+.flex-example__block8{
+  /* "space-between" задаёт одинаковое расстояние между блоками, но не между контейнером и блоками */
+  justify-content: space-between;
+}
+
+/* Пример 9 */
+.flex-example__block9{
+  /* "space-around" также задаёт одинаковое расстояние между блоками, но теперь расстояние между контейнером и блоками равно половине расстояния между блоками */
+  justify-content: space-around;
+}
+
+/* Пример 10 */
+.flex-example__block10{
+  /* Если justify-content работает с главной осью, то align-items работает с осью, перпендикулярной главной оси. */
+  /* По умолчанию "flex-start" - по верхнему краю, при условии, что  flex-direction: row */
+  align-items: flex-start;
+}
+
+/* Пример 11 */
+.flex-example__block11{
+  /* По центру "center" */
+  align-items: center;
+}
+
+/* Пример 12 */
+.flex-example__block12{
+  /* "flex-end" по нижниму краю, при условии что  flex-direction: row */
+  align-items: flex-end;
+}
+
+/* Пример 13 */
+.flex-example__block13{
+  /* "stretch" растягивает блоки по всей высоте родителя */
+  /* Стоит заметить, что для align-items: stretch высота блоков должна быть равна auto */
+  align-items: stretch;
+}
+
+/* Пример 14 */
+.flex-example__block14{
+  /* "baseline" выравнивает блоки по центральной оси */
+  align-items: baseline;
+}
+
+/* Пример 15 */
+.flex-example__block15{
+  /* Выравним все блоки по горизонтали */
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Пример 16 */
+.flex-example__block16{
+  /* Выравним все блоки по вертикали */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Пример 17 */
+.flex-example__block17{
+  align-items: start;
+}
+
+.flex-example__box--self{
+  /* "align-self" - Позволяет выравнивать элементы по отдельности */
+  align-self: center;
+}
+
+/* Пример 18 */
+.flex-example__block18{
+  flex-direction: row;
+}
+
+.flex-example__box--basis{
+  /* "flex-basis" - влияет на размер элементов вдоль главной оси */
+  flex-basis: 50px;
+  height: 100px;
+}
+
+/* Пример 19 */
+.flex-example__block19{
+  flex-direction: column;
+}
+
+/* Пример 20 */
+.flex-example__block20{
+  flex-direction: row;
+}
+
+.flex-example__box--grow1{
+  /* По умолчанию значение flex-grow равно 0. Это значит, что блокам запрещено увеличиваться в размерах */
+  /* Поменяем значение на 1, блоки равномерно займут всё пространство */
+  flex-grow: 1;
+}
+
+/* Пример 21 */
+.flex-example__block21{
+  flex-direction: row;
+}
+
+.flex-example__box--grow2{
+  /* Значение относительное относительно других блоков */
+  flex-grow: 2;
+}
+
+.flex-example__box--grow3{
+  /* У какого блока значение "flex-grow" больше, тот и займет больше пространства*/
+  flex-grow: 3;
+}
+
+/* Вначале flex-grow каждого блока равен 1, в сумме получится 5. 
+Значит, наш контейнер разделён на 5 частей. Каждый блок будет занимать 1/5 часть доступного 
+пространства в контейнере. Когда flex-grow второго блока становится равным 2, 
+контейнер делится на 6 частей: 1 + 2 +  1 + 1 + 1. Теперь третий блок занимает 2/6 пространства, 
+остальные — по 1/6. И так далее. */
+
+/* "flex-grow" работает только для главной оси, пока мы не изменим её направление */
+
+
+/* Пример 22 */
+.flex-example__block22{
+  flex-direction: row;
+  width: 30%;
+}
+
+/* Прямая противоположность "flex-grow". Определяет, насколько блоку можно уменьшиться в размере. 
+"flex-shrink" используется, когда элементы не вмещаются в контейнер. 
+Вы определяете, какие элементы должны уменьшиться в размерах, а какие — нет. 
+По умолчанию значение flex-shrink для каждого блока равно 1. Это значит, что блоки будут сжиматься, 
+когда контейнер будет уменьшаться. */
+
+.flex-example__box--shrink0{
+  flex-shrink: 0;
+}
+
+/* "flex-shrink" основывается на пропорциях. То есть, если у первого блока "flex-shrink" равен 6, 
+а у остальных он равен 2, то, это значит, что первый блок будет сжиматься в три раза быстрее, 
+чем остальные. */
+
+
+/* Пример 23 */
+.flex-example__block23{
+  flex-direction: row;
+  width: 50%;
+}
+
+.flex-example__box--flex{
+  /* Заменяет "flex-grow", "flex-shrink" и "flex-basis". Значения по умолчанию: 0 (grow) 1 (shrink) auto (basis) */
+  flex: 2 1 300px
+}
+
+/* Пример 24 */
+.flex-example__block24{
+  flex-direction: row;
+  /* Свойство "flex-wrap" задаёт правила вывода flex-элементов —  в одну строку или в несколько, 
+  с переносом блоков. Если перенос разрешён, то возможно задать направление, в котором 
+  выводятся блоки. Принемает следующие значения: */
+  /* "nowrap" - Расположение в одну линию, может привести к переполнению контейнера (по умолчанию) */
+  /* "wrap" - Расположение в несколько линий */
+  /* "wrap-reverse" - Ведёт себя так же, как и "wrap" но оси инвертированы */
+  flex-wrap: wrap;
+  width: 30%;
+}
+
+
+/* Пример 25 */
+.flex-example__block25{
+  flex-direction: row;
+}
+
+/* свойство  order определяет порядок, используемый для размещения flex элементов 
+в их flex контейнере. Элементы располагаются в восходящем порядке по значению order. 
+Элементы с одинаковым значением order  располагаются в том порядке, в каком они находятся 
+в исходном коде. */
+
+/* https://developer.mozilla.org/ru/docs/Web/CSS/order */
+
+/* Чем меньше "order" тем раньше будет стоять элемент (по умолчанию order: 0) */
+.flex-example__box--order-m1{
+  order: -1;
+}
+
+.flex-example__box--order1{
+  order: 1;
+}
+
+.flex-example__box--order2{
+  order: 2;
+}
+
+.flex-example__box{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100px;
+  width: 100px;
+  text-align: center;
+  background-color: #32a852;
+  font-size: 30px;
+  font-weight: bold;
+  color: #333;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  transition: background-color 1s;
+}
+
+.flex-example__box:hover{
+  background-color: #dc143c;
+}
+
+.flex-example__box--big{
+  min-height: 100px;
+}
+
+.flex-example__box--small{
+  min-height: 60px;
+}
+
+.flex-example__box--auto{
+  height: auto;
+}
+
+/* -------------------------------------------------------------------------------------------- */
+
+/* ----------------------------- 3. CSS @media - медиавыражения ------------------------------  */
+      /* https://developer.mozilla.org/ru/docs/Web/CSS/Media_Queries/Using_media_queries */
+
+/* Медиавыражения используются в тех случаях , когда нужно применить разные CSS-стили, 
+для разных устройств по типу отображения (например: для принтера, монитора или смартфона), 
+а также конкретных характеристик устройства  (например: ширины окна просмотра браузера) */
+
+/* Общие свойства блока для всех типов устройств */
+.media-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+  width: 500px;
+  text-align: center;
+  background-color: #32a852;
+  font-size: 25px;
+}
+
+.media-box__margen{
+  margin: 20px auto;
+}
+
+/* Данные стили будут применяться при распечатке на принтере */
+@media print{ 
+  .media-box{
+    /* Квадрат станет серым и немного меньше */
+    background-color: #777;
+    height: 450px;
+    width: 450px;
+  }
+}
+
+/* Данные стили применятся если ширина окна браузера станет меньше или ровна 1024px */
+/* Уменьшите окно своего браузера потянув за его правый край */
+@media (max-width: 1024px){
+  /* Позволяет перестраивать сайт под разные размеры экранов (адаптивная вёрстка)*/
+  /* Также для адаптивной верстки необходимо задавать относительные величины например "%" и использовать flex*/
+  .media-box{
+    /* Квадрат станет красным и немного меньше */
+    background-color: #dc143c;
+    height: 400px;
+    width: 400px;
+  }
+}
+
+/* А что дальше? ;)
+
+Рекомендую посмотреть следующие темы:
+1. CSS Grid:
+Что это:https://html5book.ru/css-grid/
+https://www.youtube.com/watch?v=yTLqfUxwdDk
+
+2. Sass препроцессор:
+Что это и с чем его едят: https://www.youtube.com/watch?v=MpzTnr5x_Wg
+Как подружить его с React: https://www.youtube.com/watch?v=2MDpClJ7Z2o
+
+*/
